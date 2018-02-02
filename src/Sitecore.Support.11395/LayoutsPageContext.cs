@@ -16,9 +16,16 @@
       {
         return null;
       }
+      string placeholderKey = phKey;
+      int num = phKey.LastIndexOf('/');
+      if (num >= 0)
+      {
+        placeholderKey = StringUtil.Mid(phKey, num + 1);
+
+      }
       return (from i in placeholderSettingsFolder.Axes.GetDescendants()
               where i.InheritsFrom(Templates.Placeholder.ID)
-              select i).FirstOrDefault((Item item) => ((BaseItem)item)[Templates.Placeholder.Fields.PlaceholderKey].Equals(phKey));
+              select i).FirstOrDefault((Item item) => ((BaseItem)item)[Templates.Placeholder.Fields.PlaceholderKey].Equals(placeholderKey));
     }
   }
 }
